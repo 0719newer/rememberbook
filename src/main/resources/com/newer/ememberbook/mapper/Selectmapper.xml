@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.newer.rememberbook.mapper.Selectmapper">
+<select id="bookadd" resultType="Article">
+select * from Sq_article
+<where>
+     Artstatus=0 and Uid=#{uid}
+    <if test="databa!=null and databa!='' and databt!=null and databt!='' ">
+   and ArtDate between #{databt} and #{databa}
+    </if>
+    <if test="labe!=null and labe!=''">
+    and Arttag like '%' #{labe} '%'
+    </if>
+</where>
+</select>
+</mapper>

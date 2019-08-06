@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html class=" js csstransforms csstransforms3d">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>拾柒-REFLECT &amp; RELEARN</title>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=9">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/template.css">
+    <link rel="stylesheet" href="css/font.css">
+
+    <link rel="shortcut icon" href="https://www.shiqichuban.com/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="css/response.css">
+    <style type="text/css">
+        .public_head span {
+            color: #7d7d7d;
+            font-size: 14px;
+            padding: 0 15px;
+            cursor: pointer;
+            letter-spacing: 1px;
+        }
+
+        input[type='radio']:after {
+            width: 15px;
+            height: 15px;
+            border-radius: 15px;
+            top: -2px;
+            left: -1px;
+            position: relative;
+            background-color: white;
+            content: '';
+            display: inline-block;
+            visibility: visible;
+            border: 1px solid #8d8d8d;
+        }
+
+        input[type='radio']:checked:after {
+            width: 15px;
+            height: 15px;
+            border-radius: 15px;
+            top: -2px;
+            left: -1px;
+            position: relative;
+            background-color: white;
+            content: '';
+            display: inline-block;
+            visibility: visible;
+            border: 5px solid #333;
+        }
+    </style>
+
+</head>
+<body>
+<div class="container-fluid" style="overflow: hidden">
+    <div class="row header" style="box-shadow: rgb(238, 238, 238) 0px 10px 10px; margin-bottom: 15px;">
+        <div class="col-xs-12 col-sm-10 col-sm-offset-1" style="line-height: 35px;">
+            <div class="col-xs-2 col-sm-2">
+                <a href="https://www.shiqichuban.com/?fp=1" class="col-xs-12"
+                   style="padding-top: 10px;padding-bottom: 5px">
+                    <img class="logo" src="images/logo40.png" alt="拾柒">
+                </a>
+            </div>
+            <div class="col-xs-9 col-sm-9 public_head"
+                 style="padding-top: 15px;text-align: right;float: right;color: #8d8d8d;">
+                	<span style=" border-bottom:5px;padding: 10px;">
+                		<a class="header-btn" href="sq_index.html">个人主页</a>
+                    </span>
+                <span><a href="sq_copy.html">印制中心</a></span>
+                <span><a href="order.html">我的订单</a></span>
+                <span><a href="zuoping.html">我的作品</a></span>
+                <span class="my_shiqi" style="position: relative;"  >
+                		<a id="my_sq">我的拾柒</a>
+                		<i><img class="my_icon_img" src="images/card_info_desc_icon.png"></i>
+                		<div class="my_list" id="my_sq2"
+                             style="display: none;position: absolute;z-index:1000;margin-top:-5px;width: 110px;right:0px;top:26px;background-color: #fff;padding-top:15px;border-radius: 4px;box-shadow: 0px 1px 4px #ccc;">
+                			<p style="text-align: center;"><a href="integral.html">我的积分</a></p>
+                			<p style="text-align: center;" id="messagebox">我的消息</p>
+                			<p style="position: absolute;left:50%;top:-20px;width:0;height: 0;border:10px solid rgba(0,0,0,0);border-bottom-color:#fff;"></p>
+                		</div>
+                	</span>
+                <span>|</span>
+                <span class="my_seting" style="position: relative;">
+                		<a id="setting">我的设置</a>
+                    	<i><img class="my_icon_img2" src="images/card_info_desc_icon.png"></i>
+                		<div id="setting_ul"
+                             style="position: absolute; z-index: 1000; width: 120px; right: 0px; top: 46px; background-color: rgb(255, 255, 255); padding-top: 15px; border-radius: 4px; box-shadow: rgb(204, 204, 204) 0px 1px 4px; display: none;">
+                			 <p style="text-align: center;"><a href="account.html">账户设置</a></p>
+							 <p style="text-align: center;"><a href="#">会员中心</a></p>
+							 <p style="text-align: center;" id="logout_btn"><a href="javascript:void(0)">退出登录</a></p>
+                			 <p style="position: absolute;left:50%;top:-20px;width:0;height: 0;border:10px solid rgba(0,0,0,0);border-bottom-color:#fff;"></p>
+                		</div>
+                	</span>
+            </div>
+        </div>
+    </div>
+    <div class="row article" style="padding: 0px; margin-left: -25px; margin-right: -25px; min-height: 706px;">
+        <style type="text/css">
+            .fl {
+                float: left;
+            }
+
+            .clearfix:after {
+                content: '';
+                display: block;
+                clear: both;
+            }
+
+            input::-webkit-input-placeholder {
+                color: #ccc;
+            }
+
+            input:-moz-placeholder {
+                color: #ccc;
+            }
+
+            input::-moz-placeholder {
+                color: #ccc;
+            }
+
+            input:-ms-input-placeholder {
+                color: #ccc;
+            }
+
+            .user_score {
+                font-size: 14px;
+                font-family: Microsoft yahei;
+            }
+
+            .user_score_head h3 {
+                color: #2c2c2c;
+                margin: 0;
+                line-height: 36px;
+                height: 36px;
+                font-size: 14px;
+            }
+
+            .user_score_head .user_score_line {
+                height: 0;
+                border-top: 1px solid #4e4e4e;
+                border-bottom: 1px solid #9e9e9e;
+            }
+
+            .user_score_view {
+                margin-top: 20px;
+                border: 1px solid #ddd;
+                border-radius: 5px;
+                background-color: #f3f3f3;
+                padding: 22px 26px;
+            }
+
+            .user_avatar img {
+                width: 54px;
+                height: 54px;
+                border-radius: 27px;
+            }
+
+            .user_info {
+                padding-left: 26px;
+            }
+
+            .user_info div {
+                font-size: 14px;
+                color: #666;
+                line-height: 26px;
+                height: 26px;
+            }
+
+            .user_info .user_score_info {
+                font-size: 24px;
+                color: #fc6b6b;
+                line-height: 34px;
+                height: 34px;
+            }
+
+            .user_score_rule {
+                margin-top: 10px;
+                border: 1px solid #ddd;
+                border-radius: 5px;
+
+            }
+
+            .score_count {
+                margin-left: 11%;
+                padding-left: 9%;
+                border-left: 1px solid #dcdcdc;
+            }
+
+            .count_des span {
+                color: #666666;
+                font-size: 14px;
+                display: inline-block;
+                vertical-align: bottom;
+            }
+
+            .count_des input {
+                border: 1px solid #e1e1e1;
+                height: 22px;
+                line-height: 22px;
+                -webkit-border-radius: 4px;
+                -moz-border-radius: 4px;
+                border-radius: 4px;
+                padding-left: 10px;
+                width: 66px;
+                margin-left: 16px;
+                margin-right: 16px;
+                background: #f3f3f3;
+                font-size: 14px;
+                color: #fc6b6b;
+                vertical-align: middle;
+            }
+
+            .count_tips {
+                color: #999999;
+                font-size: 12px;
+                height: 20px;
+                line-height: 20px;
+                margin-top: 10px;
+                color: #fc6b6b;
+            }
+
+            .score_sub span {
+                margin-left: 58px;
+                background: #ccc;
+                color: #fff;
+                display: inline-block;
+                font-size: 14px;
+                padding: 0 25px;
+                height: 34px;
+                line-height: 34px;
+                -webkit-border-radius: 17px;
+                -moz-border-radius: 17px;
+                border-radius: 17px;
+                cursor: pointer;
+            }
+
+            .score_sub span:hover {
+                background: #333;
+            }
+
+            .user_score_rule h4 {
+                background-color: #f3f3f3;
+                margin: 0;
+                font-size: 12px;
+                color: #2c2c2c;
+                padding-top: 6px;
+                line-height: 36px;
+                padding-left: 26px;
+            }
+
+            .user_score_list {
+                margin: 0;
+                padding: 0;
+                list-style: none;
+                padding-top: 15px;
+                padding-bottom: 17px;
+                padding-left: 26px;
+
+            }
+
+            .user_score_list li {
+                font-size: 12px;
+                color: #666;
+                line-height: 25px;
+                letter-spacing: 1px;
+            }
+
+            .user_score_sources {
+                margin-top: 10px;
+                border: 1px solid #ddd;
+                border-radius: 5px;
+
+            }
+
+            .user_score_sources h4 {
+                background-color: #f3f3f3;
+                margin: 0;
+                font-size: 12px;
+                color: #2c2c2c;
+                padding-top: 6px;
+                line-height: 36px;
+                padding-left: 26px;
+            }
+
+            .user_source_list {
+                margin: 0;
+                padding: 0;
+                list-style: none;
+            }
+
+            .user_source_list li {
+                font-size: 0;
+            }
+
+            .user_source_list li span {
+                text-align: center;
+                letter-spacing: 1px;
+                font-size: 12px;
+                color: #666;
+                line-height: 43px;
+                border-bottom: 1px solid #f3f3f5;
+                display: inline-block;
+                width: 33.3%;
+                vertical-align: bottom;
+            }
+
+            @media only screen and (max-width: 640px) {
+                .user_score {
+                    padding: 0 !important;
+                }
+            }
+
+            @media only screen and (max-width: 430px) {
+                .user_source_list li span {
+                    display: inline;
+                    padding-left: 25px;
+                }
+            }
+
+            @media only screen and (max-width: 1450px) {
+                .score_count {
+                    margin-left: 5%;
+                    padding-left: 4%;
+                }
+            }
+
+            @media only screen and (max-width: 1300px) {
+                .score_sub {
+                    float: right;
+                }
+            }
+        </style>
+        <div class="container-fluid">
+            <div class="col-xs-12 col-sm-10 col-sm-offset-1"
+                 style="margin-top: 10px;margin-bottom: 50px;padding-left:10px;padding-right:10px">
+                <div class="col-xs-12 user_score"
+                     style="background-color: white;border-radius:5px;min-height: 510px;padding: 28px 50px;">
+                    <div class="col-xs-12 user_score_head">
+                        <h3>我的积分</h3>
+                        <div class="user_score_line"></div>
+                        <div class="user_score_view clearfix">
+                            <div class="user_avatar fl"><img src="" id="headPhoto"></div>
+                            <div class="user_info fl">
+                                <div>您目前的积分为：</div>
+                                <div class="user_score_info" id="total"></div>
+                            </div>
+                            <div class="score_count fl">
+                                <div class="count_des">
+                                    <span>使用</span>
+                                    <input type="text"  placeholder="1000" id="count_score" oninput="shiyong()">
+                                    <span>积分 = </span>
+                                    <input type="text"  id="total2" readonly="readonly">
+                                    <span>元优惠券（1000积分＝10元）</span>
+                                </div>
+                                <div class="count_tips fl" id="msg">
+                                    (订单每满50元可使用10元优惠券)
+                                </div>
+                            </div>
+                            <div class="score_sub fl">
+                                <span id="convent">兑换</span>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-xs-12 ">
+                        <div class="user_score_rule">
+                            <h4>积分规则</h4>
+                            <ul class="user_score_list">
+
+                                <li>1.记录：每篇文章奖励5积分。</li>
+                                <li>2.兑换：满1000积分才可兑换</li>
+                                <li>3.印制：按实付金额计算，每支付1元奖励1积分(不满1元时按1积分计算)。</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 ">
+                        <div class="user_score_rule">
+                            <h4>我的优惠卷</h4>
+                            <ul class="user_score_list" id="youHuiJuan">
+                                <div style="border: 1px solid black;width: 100px;height: 30px">
+                                <div class="c-price" style="text-align: center">
+                                    <em>￥</em>
+                                    <strong>100</strong>
+                                    <span class="type">卡卷</span>
+                                </div>
+                                </div>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-xs-12">
+                        <div class="user_score_sources">
+                            <h4>积分来源</h4>
+                            <ul class="user_source_list" id="totalList">
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+    <div class="row footer"
+         style="border-top: 2px solid rgb(200, 200, 200); background-color: rgb(54, 54, 54); padding: 10px 0px;">
+            <span class="col-xs-12  col-sm-12" style="text-align: center;color:#ccc;font-size: 8px;">
+                拾柒网络技术（北京）有限公司 &gt;&gt; 京ICP备15043038
+            </span>
+    </div>
+</div>
+<div class="modular" style=""></div>
+
+<script src="js/jquery-3.2.1.js"></script>
+<script type="text/javascript" src="layer/2.4/layer.js"></script>
+
+<script>
+
+    var uid = localStorage.getItem("loginUserId");
+    $(()=>{
+        queryAll();
+        queryAllIntegral()
+    })
+    function shiyong() {
+        var total = localStorage.getItem("total");
+        var score = $("#count_score").val();
+
+        if (score>=1000){
+            //可兑换
+            $("#msg").html("(订单每满50元可使用10元优惠券)")
+        }else if (score>total){
+            //积分不足
+            $("#msg").html("(*您的积分不足！)")
+        } else {
+            //不能兑换
+            $("#msg").html(" (*积分必须超过1000哦)")
+        }
+    }
+    //查询用户信息
+    function queryAll(){
+        $.ajax({
+            type:"post",
+            url:"selectUserById",
+            dataType:"json",
+            success:function (data) {
+                console.log(data);
+                $("#headPhoto").attr("src","text/"+data.photoPath);
+                $("#total").html(data.total);
+                localStorage.setItem("total",data.total);
+            }
+        })
+    }
+    //查询积分信息
+    function queryAllIntegral(){
+        $.ajax({
+            type:"post",
+            url:"queryAllIntegral",
+            data:{"uid":uid},
+            dataType:"json",
+            success:function (data) {
+                console.log(data);
+                var temp = ``;
+                $.each(data,function (index,obj) {
+                    temp += `
+                     <li>
+                          <span>${obj.resource}</span>
+                          <span>${obj.integral}积分 </span>
+                          <span>${obj.integralTime}</span>
+                     </li>
+                    `
+
+                })
+                $("#totalList").html(temp)
+            }
+        })
+    }
+    //点击兑换
+    $("#convent").click(function () {
+        var total = localStorage.getItem("total");
+        var score = $("#count_score").val();
+        console.log(total+"ooo")
+        if (score>=1000){
+            //兑换成功      减少积分
+            var meney = score*0.01;
+            $.ajax({
+                type:"post",
+                url:"updateTotalById",
+                data:{"total":score,"uid":uid},
+                dataType:"json",
+                success:function (data) {
+                    console.log(data)
+                    if (data>0){
+                        layer.msg("兑换成功",{icon:1,time:1000})
+                        //显示money
+                        $("#total2").val(score*0.01);
+                        queryAll();
+                    }
+                }
+            })
+
+        }else if (score>total){
+            layer.msg("您的积分没有这么多哦",{icon:2,time:1000})
+
+        }
+        else {
+            //兑换失败
+            layer.msg("抱歉，您的积分不足1000",{icon:2,time:1000})
+        }
+    })
+
+    $("#my_sq").on('mouseover', function () {
+        $('.my_list').show();
+        $('.my_icon_img').css({
+            'transform': 'rotate(90deg)',
+            '-webkit-transform': 'rotate(90deg)',
+            '-ms-transform': 'rotate(90deg)',
+            '-moz-transform': 'rotate(90deg)',
+            '-o-transform': 'rotate(90deg)',
+        })
+        $('#setting_ul').hide();
+        $('.my_icon_img2').css({
+            'transform': 'rotate(0)',
+            '-webkit-transform': 'rotate(0)',
+            '-ms-transform': 'rotate(0)',
+            '-moz-transform': 'rotate(0)',
+            '-o-transform': 'rotate(0)',
+        })
+    })
+    $("#my_sq2").on('mouseover', function () {
+        $('.my_list').show();
+        $('.my_icon_img').css({
+            'transform': 'rotate(90deg)',
+            '-webkit-transform': 'rotate(90deg)',
+            '-ms-transform': 'rotate(90deg)',
+            '-moz-transform': 'rotate(90deg)',
+            '-o-transform': 'rotate(90deg)',
+        })
+    })
+    $("#my_sq2").on('mouseout', function () {
+        $('.my_list').hide();
+        $('.my_icon_img').css({
+            'transform': 'rotate(0)',
+            '-webkit-transform': 'rotate(0)',
+            '-ms-transform': 'rotate(0)',
+            '-moz-transform': 'rotate(0)',
+            '-o-transform': 'rotate(0)',
+        })
+    })
+    $("#setting").on('mouseover', function () {
+        $('#setting_ul').show();
+        $('.my_icon_img2').css({
+            'transform': 'rotate(90deg)',
+            '-webkit-transform': 'rotate(90deg)',
+            '-ms-transform': 'rotate(90deg)',
+            '-moz-transform': 'rotate(90deg)',
+            '-o-transform': 'rotate(90deg)',
+        })
+        $('.my_list').hide();
+        $('.my_icon_img').css({
+            'transform': 'rotate(0)',
+            '-webkit-transform': 'rotate(0)',
+            '-ms-transform': 'rotate(0)',
+            '-moz-transform': 'rotate(0)',
+            '-o-transform': 'rotate(0)',
+        })
+    })
+    $("#setting_ul").on('mouseover', function () {
+        $('#setting_ul').show();
+        $('.my_icon_img2').css({
+            'transform': 'rotate(90deg)',
+            '-webkit-transform': 'rotate(90deg)',
+            '-ms-transform': 'rotate(90deg)',
+            '-moz-transform': 'rotate(90deg)',
+            '-o-transform': 'rotate(90deg)',
+        })
+    })
+    $("#setting_ul").on('mouseout', function () {
+        $('#setting_ul').hide();
+        $('.my_icon_img2').css({
+            'transform': 'rotate(0)',
+            '-webkit-transform': 'rotate(0)',
+            '-ms-transform': 'rotate(0)',
+            '-moz-transform': 'rotate(0)',
+            '-o-transform': 'rotate(0)',
+        })
+    })
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.newer.rememberbook.mapper.OrdermoreMapper">
+    <select id="queryLikeBookname" resultType="com.newer.rememberbook.domain.Ordermore">
+    select ordid,ordint,orderdate,sq_ord.addressid,aname,amore,Aphone,bname,bookurl,Bprice,Bpage,Bsize,Bway,ordstatus
+            from sq_order sq_ord,sq_address address,sq_book book
+            <where>sq_ord.bid=book.bid and sq_ord.addressid=address.addressid and sq_ord.uid = #{uid}
+                <if test="ordstatus!=null and ordstatus!=''" >
+                    and ordstatus = #{ordstatus}
+                </if>
+                <if test="bname!=null and bname!=''" >
+                and bname like concat("%",concat(#{bname},"%"))
+                </if>
+            </where>
+    </select>
+</mapper>

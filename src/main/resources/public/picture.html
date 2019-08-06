@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>瀑布流布局Demo</title>
+<link href="page_css/coolShow.css" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" href="css/bootstrap.css">
+	<script src="js/bootstrap.js"></script>
+
+	<script src="js/jquery-3.2.1.js"></script>
+	<script type="text/javascript" src = "page_js/coolShow.js"></script>
+	<style>
+		*{
+			padding: 0px;
+			margin: 0px;
+		}
+		#coolShow b{
+			margin: auto;
+		}
+	</style>
+</head>
+<body style = "background:#ecf0f1;">
+<div class = "main">
+	<div id = "coolShow"></div>
+	<div id = "handBar"></div>
+</div>
+<div style="float: right;margin-right:100px;margin-top: -500px">
+	<div class="input-group mb-3" >
+	<input type="text" class="form-control" placeholder="在此添加书名：" aria-label="Recipient's username" aria-describedby="basic-addon2">
+	</div>
+</div>
+<script type="text/javascript">
+/*
+定义需要展示的图片以及图片的展示时间
+*/
+$(document).ready(function() { 
+	$('#coolShow').coolShow({
+		imgSrc:['https://static.shiqichuban.com/web/assets/covers/without_logo/ori121_fc_img1.jpg','https://res.shiqichuban.com/v1/image/get/9_6OhitL71cOEIvRTHW_L5lc4xpkpzFnwypZZ-ZgqXkJrZNizni1oYGcZ574XvHfVNxjziXLL5WLjGAY9R8paQ/h',
+			'https://static.shiqichuban.com/web/assets/covers/without_logo/ori129_fc_img1.jpg','https://static.shiqichuban.com/web/assets/covers/without_logo/ori8_fc_img1.jpg',
+			'https://static.shiqichuban.com/web/assets/covers/without_logo/ori131_fc_img1.jpg','https://static.shiqichuban.com/web/assets/covers/without_logo/ori9_fc_img1.jpg',
+			'https://static.shiqichuban.com/web/assets/covers/without_logo/ori120_fc_img1.jpg','https://res.shiqichuban.com/v1/image/get/9_6OhitL71cOEIvRTHW_L5jeNQ_IkZvMGIlvOEOmk6eVeu2mD9tUTXBpdmXjEoc3v9eOSTncefrkJcC5NvAGqQ/h'],
+		speed:40
+	});
+});
+</script>
+</body>
+</html>

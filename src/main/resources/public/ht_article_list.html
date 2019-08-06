@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="renderer" content="webkit|ie-comp|ie-stand">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport"
+	content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<!--[if lt IE 9]>
+<script type="text/javascript" src="js/html5shiv.js"></script>
+<script type="text/javascript" src="js/respond.min.js"></script>
+<script src="js/bootstrap.js"></script>
+	<![endif]-->
+<link rel="stylesheet" type="text/css"
+	href="h-ui/css/H-ui.min.css" />
+<link rel="stylesheet" type="text/css"
+	href="h-ui.admin/css/H-ui.admin.css" />
+<link rel="stylesheet" type="text/css"
+	href="Hui-iconfont/1.0.8/iconfont.css" />
+<link rel="stylesheet" type="text/css"
+	href="h-ui.admin/skin/default/skin.css" id="skin" />
+<link rel="stylesheet" type="text/css"
+	href="h-ui.admin/css/style.css" />
+	<link rel="stylesheet" href="css/bootstrap.css">
+
+	<!--[if IE 6]>
+<script type="text/javascript" src="js/DD_belatedPNG_0.0.8a-min.js" ></script>
+<script>DD_belatedPNG.fix('*');</script>
+<![endif]-->
+<title>文章管理</title>
+</head>
+<body>
+
+<nav class="breadcrumb">
+
+	<i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span>
+	用户中心 <span class="c-gray en">&gt;</span> 用户管理
+
+</nav>
+		<div class="text-c">
+			日期范围： <input type="text"
+						 onfocus="WdatePicker({ maxDate:'#F{$dp.$D(\'datemax\')||\'%y-%M-%d\'}' })"
+						 id="datemin" class="input-text Wdate" style="width: 120px;">
+			- <input type="text"
+					 onfocus="WdatePicker({ minDate:'#F{$dp.$D(\'datemin\')}',maxDate:'%y-%M-%d' })"
+					 id="datemax" class="input-text Wdate" style="width: 120px;">
+
+		<div class="row" style="margin-left: 20px">
+			<div class="col-md-1 col-sm-2">
+				<div class="btn-group">
+					<button class="btn btn-default dropdown-toggle"
+							data-toggle="dropdown">
+						<span id="search_type2">查询方式</span> <span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu" role="menu">
+						<li><a href="javascript:void(0)" class="dropOption2">所有</a></li>
+						<li><a href="javascript:void(0)" class="dropOption2">文章主题</a></li>
+						<li><a href="javascript:void(0)" class="dropOption2">文章内容</a></li>
+						<li><a href="javascript:void(0)" class="dropOption2">文章标签</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="col-md-9 col-sm-9">
+				<div>
+						<div class="col-md-3 col-sm-4">
+							<input id="search_input2" type="text" class="form-control"
+								   placeholder="查询方式"  required>
+						</div>
+						<div class="col-md-2 col-sm-2">
+							<button id="search_button" class="btn btn-success" type="button">
+								<span class="glyphicon glyphicon-search"></span>
+								<span>查询</span>
+							</button>
+						</div>
+				</div>
+
+			</div>
+		</div>
+		<div class="cl pd-5 bg-1 bk-gray mt-20">
+			 <span class="r">共有数据：<strong id="count"></strong> 条
+			</span>
+		</div>
+
+		<div class="mt-20">
+			<table id="articleList" class="table table-border table-bordered table-hover table-bg table-sort">
+
+			</table>
+		</div>
+	</div>
+
+	<!--_footer 作为公共模版分离出去-->
+	<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="js/layer/2.4/layer.js"></script>
+	<script type="text/javascript" src="h-ui/js/H-ui.min.js"></script>
+	<script type="text/javascript" src="h-ui.admin/js/H-ui.admin.js"></script>
+	<!--/_footer 作为公共模版分离出去-->
+
+	<!--请在下方写此页面业务相关的脚本-->
+	<script type="text/javascript"
+		src="js/My97DatePicker/4.8/WdatePicker.js"></script>
+	<script type="text/javascript" src="js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" src="js/laypage.js"></script>
+	<script type="text/javascript">
+        var startDate = $("#startDate").val();
+        var endDate = $("#endDate").val();
+		$(()=>{
+		queryAllMsg();
+        optionAction2();
+		});
+
+        //点击查询
+		$("#search_button").click(function () {
+            var title = $("#title").val();
+            var tag = $("#tag").val();
+            var context = $("#context").val();
+
+            localStorage.setItem("title",title)
+            localStorage.setItem("tag",tag)
+            localStorage.setItem("context",context)
+
+            console.log(title+"--"+tag+"---"+context)
+            queryAllMsg();
+        })
+        //
+        function optionAction2() {
+            $(".dropOption2").click(function() {
+                var type = $(this).text();
+                $("#search_input2").val("");
+                if (type == "所有") {
+                    $("#search_input2").attr("type", "text");
+                    $("#search_input2").attr("readOnly", "true");
+                    $("#search_input2").val("所有");
+                    document.getElementById("search_input2").id = "all";
+                } else if (type == "文章主题") {
+                    $("#search_input2").attr("type", "text");
+                    $("#search_input2").removeAttr("readOnly");
+                    document.getElementById("search_input2").id = "title";
+
+                } else if (type == "文章内容") {
+                    $("#search_input2").attr("type", "text");
+                    $("#search_input2").removeAttr("readOnly");
+                    document.getElementById("search_input2").id = "context";
+
+                } else if (type == "文章标签") {
+                    $("#search_input2").attr("type", "text");
+                    $("#search_input2").removeAttr("readOnly");
+                    document.getElementById("search_input2").id = "tag";
+
+                } else {
+                    $("#search_input2").removeAttr("readOnly");
+                }
+
+                $("#search_type2").text(type);
+                $("#search_input2").attr("placeholder", type);
+
+            })
+        }
+    function queryAllMsg() {
+        var startDate = $("#startDate").val();
+        var endDate = $("#endDate").val();
+        var title = localStorage.getItem("title")
+        var tag = localStorage.getItem("tag")
+        var context = localStorage.getItem("context")
+        var table1 = $("#articleList").dataTable({
+            searching:false,
+            bDestroy:true,
+            sAjaxSource : "queryAllByatype",
+            fnServerParams:function (aoData) {
+                aoData.push({"name":"startDate","value":startDate});
+                aoData.push({"name":"endDate","value":endDate});
+                aoData.push({"name":"title","value":title});
+                aoData.push({"name":"context","value":context});
+                aoData.push({"name ":"tag","value":tag});
+
+            },
+            fnServerData : function(sSource, aoData, fnCallback) { // 向服务器发送请求
+                // 1.sSource -- 请求路径 2.aoData -- dataTable封装参数 3.回调函数
+                $.ajax({
+                    type : "post",
+                    url : sSource,
+                    dataType : "json",
+                    data : aoData,
+                    success : function(data) {
+                        console.log(data);
+                        $("#count").html(data.iTotalRecords)
+                        fnCallback(data);
+                    },
+                    error : function(data) {
+                        alert("真不巧")
+                    }
+                });
+            },
+            // render : function(phone, dis, obj) {
+            // 	var first = phone.substring(0, 1);
+            // 	var last = phone.substring(phone.length - 1, phone.length);
+            // 	return first + "***" + last;
+            // 	return "<span style = 'color:red'>" + phone + "</span>";
+            // 	return phone;
+            // }
+            /* "language":{url:"../js/zh_CN.txt"}, */
+            bServerSide : true,
+            bDestroy:true,
+            aoColumns:[
+                {
+                    mDataProp:"artid",
+                    sTitle:"文章id"
+                },
+				{
+                    mDataProp:"val",
+                    sTitle:"文章状态",
+                    render:function (val,dis,obj) {
+                        var val ="";
+						if (obj.artstatus==0){
+						    val='正常';
+						}
+						return val;
+                    }
+                },
+                {
+                    mDataProp:"atype",
+                    sTitle:"文章类型",
+                    render:function (val,dis,obj) {
+                        var val ="";
+                        if (obj.atype==101){
+                            val='待审批';
+                        }else if (obj.atype==102){
+                            val='二次审批';
+						}else if (obj.atype==103){
+                            val='最终审批';
+                        }
+                        return val;
+                    }
+                },
+                {
+                    mDataProp:"arttitle",
+                    sTitle:"文章主题",
+                },
+                {
+                    mDataProp:"arttext",
+                    sTitle:"文章内容",
+                    // render:function (val,dis,obj,id) {
+                    //     val=`
+                    // <button class="btn btn-primary radius" onclick="article_upd('审批文章内容','article_upd.html','800','500',${obj.id})" type="button">修改</button>
+                    // `
+                    //     return val;
+                    // }
+                },
+                {
+                    mDataProp:"arttag",
+                    sTitle:"文章标签",
+                },
+                {
+                    mDataProp:"artDate",
+                    sTitle:"创作时间",
+                },
+
+                {
+                    mDataProp:"artid",
+                    sTitle:"操作",
+                    render:function (val,obj) {
+                        val=`
+                    <a style="text-decoration:none" onClick="bear(obj.artid)" href="javascript:;" title="禁封"><i class="Hui-iconfont">&#xe631;</i></a>
+                    `
+                        return val;
+                    }
+                },
+            ]
+        });
+    }
+
+		/* 用户-查看 */
+		function member_show(title, url, id, w, h) {
+			layer_show(title, url, w, h);
+		}
+		//点击禁封
+		function bear(artId) {
+		    layer.confirm("确定禁封?",{icon:9,title:"确定"},function (index) {
+			$.ajax({
+				type:"post",
+				url:"BearArticle",
+				data:{"artid":artid},
+				dataType:"json",
+				success:function (data) {
+					console.log(data);
+					if (data>0){
+					    //禁封成功
+						 layer.msg("禁封成功",{icon:1,time:1000});
+					}else {
+                        layer.msg("禁封失败",{icon:2,time:1000});
+                    }
+                }
+			})
+		    })
+        }
+
+
+		
+	</script>
+
+</body>
+</html>

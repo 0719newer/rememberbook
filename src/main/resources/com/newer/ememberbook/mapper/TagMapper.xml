@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.newer.rememberbook.mapper.TagMapper">
+    <select id="queryAllTag" resultType="Tag">
+        select * from sq_tag
+        <where>
+            1=1
+            <if test="tagname!=null and tagname!=''">
+                and tagname like concat('%',concat(#{tagname},'%'))
+            </if>
+        </where>
+        limit #{startIndex},#{pageSize}
+    </select>
+
+    <select id="getTotal" resultType="int">
+        select count(tagid) from sq_tag
+        <where>
+           1=1
+            <if test="tagname!=null and tagname!=''">
+                and tagname like concat('%',concat(#{tagname},'%'))
+            </if>
+        </where>
+    </select>
+</mapper>
